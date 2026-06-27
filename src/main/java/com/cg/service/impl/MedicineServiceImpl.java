@@ -83,9 +83,6 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Override
     public MedicineResponseDto createMedicine(MedicineRequestDto medicineRequestDto) {
-        System.out.println("CategoryId = " + medicineRequestDto.getCategoryId());
-        System.out.println("BrandId = " + medicineRequestDto.getBrandId());
-        System.out.println(medicineRequestDto);
         Category category = categoryRepo.findById(medicineRequestDto.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
 

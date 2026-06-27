@@ -18,20 +18,30 @@ import java.time.LocalDateTime;
 public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long inventory_id;
+    @Column(name = "inventory_id")
+    private Long inventoryId;
 
     @OneToOne
     @JoinColumn(name = "medicine_id")
     private Medicine medicine;
-    private int available_quantity;
-    private int reserved_quantity;
-    private int reorder_level;
+
+    @Column(name = "available_quantity" )
+    private int availableQuantity;
+
+    @Column(name = "reserved_quantity")
+    private int reservedQuantity;
+
+    @Column(name = "reorder_level")
+    private int reorderLevel;
 
     @Enumerated(EnumType.STRING)
-    private StockStatus stock_status;
-    private LocalDateTime last_updated_at;
+    @Column(name = "stock_status")
+    private StockStatus stockStatus;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "update_by")
+    @Column(name = "last_updated_at")
+    private LocalDateTime lastUpdatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "updated_by")
     private User updatedBy;
 }
