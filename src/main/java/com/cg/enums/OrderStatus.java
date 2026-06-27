@@ -1,0 +1,11 @@
+package com.cg.enums;
+
+public enum OrderStatus {
+    CONFIRMED,
+    PACKED,
+    SHIPPED,
+    DELIVERED,
+    PRESCRIPTION_UNDER_REVIEW,
+    PRESCRIPTION_REJECTED,
+    CANCELLED
+}
