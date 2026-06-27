@@ -18,17 +18,27 @@ import java.time.LocalDateTime;
 public class Prescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long prescription_id;
+    @Column(name = "prescription_id")
+    private Long prescriptionId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    private String file_name;
-    private String file_url;
-    private String file_type;
-    private int file_size;
-    private LocalDateTime uploaded_at;
+    @Column(name = "file_name")
+    private String fileName;
+
+    @Column(name = "file_url")
+    private String fileUrl;
+
+    @Column(name = "file_type")
+    private String fileType;
+
+    @Column(name = "file_size")
+    private int fileSize;
+
+    @Column(name = "uploaded_at")
+    private LocalDateTime uploadedAt;
 
     @Enumerated(EnumType.STRING)
     private PrescriptionStatus status;
@@ -37,7 +47,10 @@ public class Prescription {
     @JoinColumn(name = "reviewed_by")
     private User reviewedBy;
 
-    private LocalDateTime reviewed_at;
-    private String rejection_reason;
+    @Column(name = "reviewed_at")
+    private LocalDateTime reviewedAt;
+
+    @Column(name = "rejection_reason")
+    private String rejectionReason;
     private String notes;
 }
