@@ -10,6 +10,7 @@ import java.util.List;
 public interface PrescriptionService {
     List<PrescriptionResponseDto> getPrescriptionByStatus(PrescriptionStatus status);
     PrescriptionResponseDto getPrescriptionById(Long prescriptionId);
+    List<PrescriptionResponseDto> getPrescriptionByUserId(Long userId);
     PrescriptionResponseDto createPrescription(PrescriptionRequestDto prescriptionRequestDto);
     PrescriptionResponseDto updatePrescription(Long prescriptionId, PrescriptionUpdateRequestDto prescriptionDto);
     void deletePrescription(Long prescriptionId);

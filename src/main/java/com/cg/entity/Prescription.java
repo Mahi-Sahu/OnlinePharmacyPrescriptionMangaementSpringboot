@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "prescriptions")
@@ -53,4 +54,9 @@ public class Prescription {
     @Column(name = "rejection_reason")
     private String rejectionReason;
     private String notes;
+
+    @OneToMany(mappedBy = "relatedPrescription",
+            cascade = CascadeType.REMOVE)
+    private List<Notification> notifications;
+
 }

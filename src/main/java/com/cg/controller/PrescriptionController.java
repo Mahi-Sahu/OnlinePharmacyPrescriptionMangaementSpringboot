@@ -30,6 +30,11 @@ public class PrescriptionController {
         return new ResponseEntity<>(prescriptionService.getPrescriptionById(prescriptionId), HttpStatus.OK);
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<PrescriptionResponseDto>> getPrescriptionByUserId(@PathVariable Long userId){
+        return new ResponseEntity<>(prescriptionService.getPrescriptionByUserId(userId), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<PrescriptionResponseDto> createPrescription(@RequestBody PrescriptionRequestDto prescriptionRequestDto){
         return new ResponseEntity<>(prescriptionService.createPrescription(prescriptionRequestDto), HttpStatus.OK);

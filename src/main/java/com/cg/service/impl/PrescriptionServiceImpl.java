@@ -6,9 +6,11 @@ import com.cg.dto.response.PrescriptionResponseDto;
 import com.cg.entity.Prescription;
 import com.cg.entity.User;
 import com.cg.enums.PrescriptionStatus;
+import com.cg.repository.OrderRepository;
 import com.cg.repository.PrescriptionRepository;
 import com.cg.repository.UserRepository;
 import com.cg.service.PrescriptionService;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +23,15 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private final ModelMapper modelMapper;
     private final PrescriptionRepository prescriptionRepository;
     private final UserRepository userRepository;
+    private final OrderRepository orderRepository;
 
     PrescriptionServiceImpl(ModelMapper modelMapper, PrescriptionRepository prescriptionRepository,
-                            UserRepository userRepository) {
+                            UserRepository userRepository,
+                            OrderRepository orderRepository) {
         this.modelMapper = modelMapper;
         this.prescriptionRepository = prescriptionRepository;
         this.userRepository = userRepository;
+        this.orderRepository = orderRepository;
     }
     @Override
     public List<PrescriptionResponseDto> getPrescriptionByStatus(PrescriptionStatus status) {
@@ -44,6 +49,16 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         if(prescription.isEmpty())
             return null;
         return modelMapper.map(prescription.get(),PrescriptionResponseDto.class);
+    }
+
+    @Override
+    public List<PrescriptionResponseDto> getPrescriptionByUserId(Long userId) {
+        List<Prescription> prescriptions=prescriptionRepository.findPrescriptionByUser(userId);
+        if(prescriptions.isEmpty())
+            return null;
+        List<PrescriptionResponseDto> prescriptionDtos=prescriptions.stream()
+                .map(p->modelMapper.map(p,PrescriptionResponseDto.class)).toList();
+        return prescriptionDtos;
     }
 
     @Override
@@ -97,9 +112,14 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
+    @Transactional
     public void deletePrescription(Long prescriptionId) {
         Prescription prescription=prescriptionRepository.findById(prescriptionId)
                 .orElseThrow(()->new RuntimeException("Prescription not found"));
+        if (orderRepository.existsByPrescriptionId(prescriptionId)) {
+            throw new RuntimeException(
+                    "Cannot delete prescription because it is already associated with an order.");
+        }
         prescriptionRepository.delete(prescription);
     }
 }
