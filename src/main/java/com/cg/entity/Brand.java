@@ -22,7 +22,8 @@ public class Brand {
     @Column(name = "brand_name")
     private String brandName;
     private String description;
-    private Integer is_active;
+    @Column(name = "is_active")
+    private Integer isActive;
 
     @OneToMany(mappedBy = "brand")
     @JsonIgnore
