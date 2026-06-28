@@ -2,6 +2,7 @@ package com.cg.service;
 
 import com.cg.dto.request.PrescriptionRequestDto;
 import com.cg.dto.request.PrescriptionUpdateRequestDto;
+import com.cg.dto.response.PrescriptionMedicineResponseDto;
 import com.cg.dto.response.PrescriptionResponseDto;
 import com.cg.enums.PrescriptionStatus;
 

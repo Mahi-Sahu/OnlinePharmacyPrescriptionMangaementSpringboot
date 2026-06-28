@@ -1,6 +1,7 @@
 package com.cg.repository;
 
 import com.cg.entity.Prescription;
+import com.cg.entity.PrescriptionMedicineMapping;
 import com.cg.enums.PrescriptionStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,4 +17,11 @@ public interface PrescriptionRepository extends JpaRepository<Prescription,Long>
         where p.user.userId= :userId
                 """)
     List<Prescription> findPrescriptionByUser(Long userId);
+
+    @Query("""
+    SELECT p
+    FROM PrescriptionMedicineMapping p
+    WHERE p.prescription.prescriptionId = :prescriptionId
+    """)
+    List<PrescriptionMedicineMapping> findByPrescriptionId(Long prescriptionId);
 }

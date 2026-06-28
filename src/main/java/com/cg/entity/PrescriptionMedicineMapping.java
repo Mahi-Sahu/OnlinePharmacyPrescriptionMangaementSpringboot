@@ -26,7 +26,10 @@ public class PrescriptionMedicineMapping {
     @JoinColumn(name = "medicine_id")
     private Medicine medicine;
 
-    private Integer requested_quantity;
-    private  String doctor_notes;
+    @Column(name = "requested_quantity")
+    private Integer requestedQuantity;
+
+    @Column(name = "doctor_notes")
+    private  String doctorNotes;
 
 }

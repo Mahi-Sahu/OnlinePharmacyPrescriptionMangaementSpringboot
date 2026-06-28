@@ -2,6 +2,7 @@ package com.cg.controller;
 
 import com.cg.dto.request.MedicineRequestDto;
 import com.cg.dto.response.MedicineResponseDto;
+import com.cg.dto.response.PrescriptionMedicineResponseDto;
 import com.cg.enums.ProductType;
 import com.cg.service.MedicineService;
 import org.modelmapper.ModelMapper;
@@ -55,6 +56,11 @@ public class MedicineController {
         List<MedicineResponseDto> medicines=medicineService.getMedicineByBrandName(brandName).stream()
                 .map(m-> modelMapper.map(m,MedicineResponseDto.class)).toList();
         return new ResponseEntity<>(medicines, HttpStatus.OK);
+    }
+
+    @GetMapping("/prescription/{prescriptionId}")
+    public ResponseEntity<List<PrescriptionMedicineResponseDto>> getMedicineByPrescriptionId(@PathVariable Long prescriptionId) {
+        return new ResponseEntity<>(medicineService.getMedicineByPrescriptionId(prescriptionId),HttpStatus.OK);
     }
 
     @PostMapping
