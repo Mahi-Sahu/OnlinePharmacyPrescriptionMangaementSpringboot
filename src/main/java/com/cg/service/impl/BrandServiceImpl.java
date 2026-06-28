@@ -39,6 +39,15 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
+    public List<BrandResponseDto> getBrandsByCategory(Long categoryId) {
+        List<Brand> brands=brandRepository.findBrandByCategory(categoryId);
+        if(brands.isEmpty()){
+            return null;
+        }
+        return brands.stream().map(b->modelMapper.map(b,BrandResponseDto.class)).toList();
+    }
+
+    @Override
     public BrandResponseDto createBrand(BrandRequestDto brandRequestDto) {
         Brand brand=new Brand();
         brand.setBrandName(brandRequestDto.getBrandName());

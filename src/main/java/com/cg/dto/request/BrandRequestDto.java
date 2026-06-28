@@ -2,7 +2,6 @@ package com.cg.dto.request;
 
 import lombok.*;
 
-import java.util.List;
 
 @Getter
 @Setter

@@ -19,7 +19,9 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private Long categoryId;
-    private String category_name;
+
+    @Column(name = "category_name")
+    private String categoryName;
     private String description;
     private String image_url;
     private Integer is_active;

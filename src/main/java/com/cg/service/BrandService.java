@@ -8,6 +8,7 @@ import java.util.List;
 public interface BrandService {
     List<BrandResponseDto> getAllBrands();
     BrandResponseDto getBrandByName(String brandName);
+    List<BrandResponseDto> getBrandsByCategory(Long categoryId);
     BrandResponseDto createBrand(BrandRequestDto brandRequestDto);
     BrandResponseDto updateBrand(Long brandId,BrandRequestDto brandRequestDto);
     void deleteBrand(Long id);
