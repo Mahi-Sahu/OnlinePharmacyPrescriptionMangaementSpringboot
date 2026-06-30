@@ -23,9 +23,15 @@ public class Category {
     @Column(name = "category_name")
     private String categoryName;
     private String description;
-    private String image_url;
-    private Integer is_active;
-    private LocalDateTime created_at;
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    @Column(name = "is_active")
+    private Integer isActive;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "category")
     @JsonIgnore
