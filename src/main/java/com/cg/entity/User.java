@@ -2,6 +2,7 @@ package com.cg.entity;
 
 import com.cg.enums.Gender;
 import com.cg.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -42,20 +43,26 @@ public class User {
     private LocalDateTime updated_at;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Address> addresses;
 
     @OneToMany(mappedBy = "updatedBy")
+    @JsonIgnore
     private List<Inventory> updatedInventories;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Notification> notifications;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
     private List<Order> orders;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Prescription> prescriptions;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<SupportTicket>  supportTickets;
 }

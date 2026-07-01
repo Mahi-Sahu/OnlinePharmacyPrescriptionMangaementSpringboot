@@ -16,7 +16,8 @@ import lombok.Setter;
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer order_item_id;
+    @Column(name = "order_item_id")
+    private Integer orderItemId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")

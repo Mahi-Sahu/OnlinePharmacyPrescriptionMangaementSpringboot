@@ -18,18 +18,21 @@ public class OrderStatusHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_status_history_id")
-    private Long history_id;
+    private Long historyId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
 
     private String status;
-    private String status_message;
+
+    @Column(name = "status_message")
+    private String statusMessage;
 
     @ManyToOne
     @JoinColumn(name = "updated_by")
     private User updatedBy;
 
-    private LocalDateTime updated_at;
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 }

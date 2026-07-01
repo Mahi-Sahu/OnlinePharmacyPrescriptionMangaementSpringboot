@@ -19,8 +19,11 @@ import java.util.List;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long order_id;
-    private String order_number;
+    @Column(name = "order_id")
+    private Long orderId;
+
+    @Column(name = "order_number")
+    private String orderNumber;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -34,27 +37,48 @@ public class Order {
     @JoinColumn(name = "prescription_id")
     private Prescription prescription;
 
-    private LocalDateTime order_date;
+    @Column(name = "order_date")
+    private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)
-    private DeliverType delivery_type;
-    private String delivery_slot;
-    private Double subtotal_amount;
-    private Double discount_amount;
-    private Double delivery_charge;
-    private Double total_amount;
+    @Column(name = "delivery_type")
+    private DeliverType deliveryType;
+
+    @Column(name = "delivery_slot")
+    private String deliverySlot;
+
+    @Column(name = "subtotal_amount")
+    private Double subtotalAmount;
+
+    @Column(name = "discount_amount")
+    private Double discountAmount;
+
+    @Column(name = "delivery_charge")
+    private Double deliveryCharge;
+
+    @Column(name = "total_amount")
+    private Double totalAmount;
 
     @Enumerated(EnumType.STRING)
-    private PaymentMethod  payment_method;
+    @Column(name = "payment_method")
+    private PaymentMethod  paymentMethod;
 
     @Enumerated(EnumType.STRING)
-    private PaymentStatus  payment_status;
+    @Column(name = "payment_status")
+    private PaymentStatus  paymentStatus;
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus  order_status;
-    private String cancel_reason;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    @Column(name = "order_status")
+    private OrderStatus  orderStatus;
+
+    @Column(name = "cancel_reason")
+    private String cancelReason;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     @OneToOne(mappedBy = "order")
     private DeliveryTracking deliveryTracking;
