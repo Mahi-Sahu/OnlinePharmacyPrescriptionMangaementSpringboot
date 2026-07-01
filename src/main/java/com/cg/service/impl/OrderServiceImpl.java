@@ -11,10 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -71,6 +68,15 @@ public class OrderServiceImpl implements OrderService {
             return null;
         }
         return activeOrders.stream().map(o->modelMapper.map(o,OrderResponseDto.class)).toList();
+    }
+
+    @Override
+    public List<OrderResponseDto> getOrderByStatus(OrderStatus orderStatus) {
+        List<Order> orders=orderRepository.findByOrderStatus(orderStatus);
+        if(orders.isEmpty()){
+            return null;
+        }
+        return orders.stream().map(o->modelMapper.map(o,OrderResponseDto.class)).toList();
     }
 
     @Override

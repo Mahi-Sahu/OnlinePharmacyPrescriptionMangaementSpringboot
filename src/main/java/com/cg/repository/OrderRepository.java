@@ -31,4 +31,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
        WHERE o.orderStatus IN :orderStatuses
        """)
     List<Order> findByOrderStatusIn(List<OrderStatus> orderStatuses);
+
+    List<Order> findByOrderStatus(OrderStatus orderStatus);
 }

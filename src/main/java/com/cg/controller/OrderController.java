@@ -3,6 +3,7 @@ package com.cg.controller;
 import com.cg.dto.request.OrderRequestDto;
 import com.cg.dto.response.OrderResponseDto;
 import com.cg.dto.response.OrderStatusHistoryResponseDto;
+import com.cg.enums.OrderStatus;
 import com.cg.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,11 @@ public class OrderController {
     @GetMapping("/status-history")
     public ResponseEntity<List<OrderStatusHistoryResponseDto>> getStatusHistory(@RequestParam Long orderId) {
         return new ResponseEntity<>(orderService.getOrderHistory(orderId), HttpStatus.OK);
+    }
+
+    @GetMapping("/status")
+    public ResponseEntity<List<OrderResponseDto>> getAllOrdersByStatus(@RequestParam OrderStatus orderStatus) {
+        return new ResponseEntity<>(orderService.getOrderByStatus(orderStatus), HttpStatus.OK);
     }
 
     @PostMapping
