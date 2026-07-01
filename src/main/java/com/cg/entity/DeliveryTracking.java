@@ -20,21 +20,32 @@ public class DeliveryTracking {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "delivery_tracking_id")
-    private Long delTrackingId;
+    private Long trackingId;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
 
-    private String tracking_number;
-    private String delivery_partner;
-    private Date estimated_delivery_date;
-    private LocalDateTime dispatched_at;
-    private LocalDateTime delivered_at;
+    @Column(name = "tracking_number")
+    private String trackingNumber;
+
+    @Column(name = "delivery_partner")
+    private String deliveryPartner;
+
+    @Column(name = "estimated_delivery_date")
+    private Date estimatedDelDate;
+
+    @Column(name = "dispatched_at")
+    private LocalDateTime dispatchedAt;
+
+    @Column(name = "delivered_at")
+    private LocalDateTime deliveredAt;
 
     @Enumerated(EnumType.STRING)
-    private DeliveryStatus delivery_status;
+    @Column(name = "delivery_status")
+    private DeliveryStatus deliveryStatus;
 
-    private String delivery_notes;
+    @Column(name = "delivery_notes")
+    private String deliveryNotes;
 
 }
