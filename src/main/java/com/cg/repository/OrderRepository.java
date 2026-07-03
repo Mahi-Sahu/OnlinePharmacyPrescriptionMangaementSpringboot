@@ -33,4 +33,12 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findByOrderStatusIn(List<OrderStatus> orderStatuses);
 
     List<Order> findByOrderStatus(OrderStatus orderStatus);
+
+    @Query("""
+        select distinct o from Order o
+        join o.orderItems oi
+        join oi.medicine m
+        where m.brand.brandId=:brandId
+        """)
+    List<Order> findByBrandId(Long brandId);
 }

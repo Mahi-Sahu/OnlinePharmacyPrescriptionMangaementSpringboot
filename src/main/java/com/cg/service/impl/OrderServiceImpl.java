@@ -80,6 +80,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<OrderResponseDto> getOrderByBrand(Long brandId) {
+        List<Order> orders = orderRepository.findByBrandId(brandId);
+        if(orders.isEmpty()){
+            return null;
+        }
+        return orders.stream().map(o->modelMapper.map(o,OrderResponseDto.class)).toList();
+    }
+
+    @Override
     public OrderResponseDto createOrder(OrderRequestDto orderRequestDto) {
         User user=userRepository.findById(orderRequestDto.getUserId()).orElseThrow(()->new RuntimeException("User Not Found"));
         Prescription prescription=prescriptionRepository.findById(orderRequestDto.getPrescriptionId())

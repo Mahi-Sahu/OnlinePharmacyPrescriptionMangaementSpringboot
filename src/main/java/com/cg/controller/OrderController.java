@@ -44,6 +44,11 @@ public class OrderController {
         return new ResponseEntity<>(orderService.getOrderByStatus(orderStatus), HttpStatus.OK);
     }
 
+    @GetMapping("brand")
+    public ResponseEntity<List<OrderResponseDto>> getOrderByBrand(@RequestParam Long brandId) {
+        return new ResponseEntity<>(orderService.getOrderByBrand(brandId),HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<OrderResponseDto> createOrder(@RequestBody OrderRequestDto orderRequestDto) {
         return new  ResponseEntity<>(orderService.createOrder(orderRequestDto), HttpStatus.CREATED);
