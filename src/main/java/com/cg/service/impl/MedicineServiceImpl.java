@@ -2,11 +2,9 @@ package com.cg.service.impl;
 
 import com.cg.dto.request.MedicineRequestDto;
 import com.cg.dto.response.MedicineResponseDto;
+import com.cg.dto.response.MedicineTagResponseDto;
 import com.cg.dto.response.PrescriptionMedicineResponseDto;
-import com.cg.entity.Brand;
-import com.cg.entity.Category;
-import com.cg.entity.Medicine;
-import com.cg.entity.PrescriptionMedicineMapping;
+import com.cg.entity.*;
 import com.cg.enums.ProductType;
 import com.cg.repository.*;
 import com.cg.service.MedicineService;
@@ -26,19 +24,22 @@ public class MedicineServiceImpl implements MedicineService {
     private final BrandRepository brandRepo;
     private final ModelMapper modelMapper;
     private final PrescriptionRepository prescriptionRepo;
+    private final MedicineTagMappingRepository tagRepo;
 
     public MedicineServiceImpl(MedicineAlternativesRepository medicineAlternativesRepo,
                                MedicineRepository medicineRepo,
                                CategoryRepository categoryRepo,
                                BrandRepository brandRepo,
                                ModelMapper modelMapper,
-                               PrescriptionRepository prescriptionRepo) {
+                               PrescriptionRepository prescriptionRepo,
+                               MedicineTagMappingRepository tagRepo) {
         this.medicineAlternativesRepo = medicineAlternativesRepo;
         this.medicineRepo = medicineRepo;
         this.categoryRepo = categoryRepo;
         this.brandRepo = brandRepo;
         this.prescriptionRepo = prescriptionRepo;
         this.modelMapper = modelMapper;
+        this.tagRepo = tagRepo;
     }
 
     @Override
@@ -110,6 +111,26 @@ public class MedicineServiceImpl implements MedicineService {
             dto.setDosageNotes(medicine.getDosageNotes());
             dto.setPrescriptionRequired(medicine.getPrescriptionRequired());
 
+            return dto;
+        }).toList();
+    }
+
+    @Override
+    public List<MedicineTagResponseDto> getMedicineByTagName(String tagName) {
+        List<MedicineTagMapping> medicines=tagRepo.findByTagName(tagName);
+        if(medicines.isEmpty()){
+            return null;
+        }
+        return medicines.stream().map(m->{
+            MedicineTagResponseDto dto = new MedicineTagResponseDto();
+            dto.setTagId(m.getTag().getTagId());
+            dto.setTagName(m.getTag().getTagName());
+            dto.setMedicineId(m.getMedicine().getMedicineId());
+            dto.setMedicineName(m.getMedicine().getMedicineName());
+            dto.setDescription(m.getTag().getDescription());
+            dto.setGenericName(m.getMedicine().getGenericName());
+            dto.setBrandName(m.getMedicine().getBrand().getBrandName());
+            dto.setPrice(m.getMedicine().getPrice());
             return dto;
         }).toList();
     }

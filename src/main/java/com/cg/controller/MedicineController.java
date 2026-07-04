@@ -2,6 +2,7 @@ package com.cg.controller;
 
 import com.cg.dto.request.MedicineRequestDto;
 import com.cg.dto.response.MedicineResponseDto;
+import com.cg.dto.response.MedicineTagResponseDto;
 import com.cg.dto.response.PrescriptionMedicineResponseDto;
 import com.cg.enums.ProductType;
 import com.cg.service.MedicineService;
@@ -61,6 +62,11 @@ public class MedicineController {
     @GetMapping("/prescription/{prescriptionId}")
     public ResponseEntity<List<PrescriptionMedicineResponseDto>> getMedicineByPrescriptionId(@PathVariable Long prescriptionId) {
         return new ResponseEntity<>(medicineService.getMedicineByPrescriptionId(prescriptionId),HttpStatus.OK);
+    }
+
+    @GetMapping("/tag")
+    public ResponseEntity<List<MedicineTagResponseDto>> getMedicineByTagName(@RequestParam String tagName) {
+        return new ResponseEntity<>(medicineService.getMedicineByTagName(tagName),HttpStatus.OK);
     }
 
     @PostMapping

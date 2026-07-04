@@ -15,7 +15,11 @@ import lombok.Setter;
 public class MedicineTag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tag_id;
-    private String tag_name;
+    @Column(name = "tag_id")
+    private Long tagId;
+
+    @Column(name = "tag_name")
+    private String tagName;
+
     private String description;
 }
