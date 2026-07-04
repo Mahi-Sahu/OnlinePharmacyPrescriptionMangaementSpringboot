@@ -1,10 +1,7 @@
-package com.cg.dto.response;
+package com.cg.dto.request;
 
-import com.cg.entity.*;
 import com.cg.enums.Gender;
 import com.cg.enums.Role;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,14 +9,12 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponseDto {
-    private Long userId;
+public class UserRequestDto {
     private String firstName;
     private String lastName;
     private String email;
@@ -27,10 +22,9 @@ public class UserResponseDto {
     private String phone;
     private LocalDate dob;
     private Gender gender;
-    private Role  role;
+    private Role role;
     private String emergencyContactName;
     private String  emergencyContactPhone;
     private Integer isActive;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+
 }

@@ -21,11 +21,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long userId;
-    private String first_name;
-    private String last_name;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
     private String email;
     @Column(name = "password_hash")
     private String password;
+
     private String phone;
     @Column(name = "date_of_birth")
     private LocalDate dob;
@@ -36,11 +42,20 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role  role;
 
-    private String emergency_contact_name;
-    private String  emergency_contact_phone;
-    private Integer is_active;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    @Column(name = "emergency_contact_name")
+    private String emergencyContactName;
+
+    @Column(name = "emergency_contact_phone")
+    private String  emergencyContactPhone;
+
+    @Column(name = "is_active")
+    private Integer isActive;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
