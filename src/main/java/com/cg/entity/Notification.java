@@ -31,7 +31,8 @@ public class Notification {
     private String message;
 
     @Enumerated(EnumType.STRING)
-    private NotificationType notification_type;
+    @Column(name = "notification_type")
+    private NotificationType notificationType;
 
     @ManyToOne
     @JoinColumn(name = "related_order_id")
@@ -41,7 +42,10 @@ public class Notification {
     @JoinColumn(name = "related_prescription_id")
     private Prescription relatedPrescription;
 
-    private Integer is_read;
-    private LocalDateTime created_at;
+    @Column(name = "is_read")
+    private Integer isRead;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
 }
