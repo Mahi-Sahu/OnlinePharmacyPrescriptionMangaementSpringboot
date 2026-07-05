@@ -43,8 +43,11 @@ public class SupportTicket {
     @JoinColumn(name = "assignedAdmin")
     private  User assignedAdmin;
 
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
     private List<SupportTicketMessage> messages;
