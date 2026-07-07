@@ -34,20 +34,36 @@ public class SupportTicketServiceImpl implements SupportTicketService {
     @Override
     public List<SupportTicketResponseDto> getTicketByUserId(Long userId) {
         List<SupportTicket> tickets = ticketRepository.findByUserId(userId);
-        return tickets.stream().map(st->modelMapper.map(st,SupportTicketResponseDto.class)).toList();
+        return tickets.stream().map(st->{
+            SupportTicketResponseDto dto=modelMapper.map(st,SupportTicketResponseDto.class);
+
+            if(st.getAssignedAdmin()!=null){
+                dto.setAssignedAdminId(st.getAssignedAdmin().getUserId());
+            }
+            return dto;
+        }).toList();
     }
 
     @Override
     public SupportTicketResponseDto getTicketById(Long ticketId) {
         SupportTicket ticket=ticketRepository.findById(ticketId)
                 .orElseThrow(()->new RuntimeException("Ticket not found"));
-        return modelMapper.map(ticket, SupportTicketResponseDto.class);
+        SupportTicketResponseDto dto=modelMapper.map(ticket, SupportTicketResponseDto.class);
+        dto.setAssignedAdminId(ticket.getAssignedAdmin().getUserId());
+        return dto;
     }
 
     @Override
     public List<SupportTicketResponseDto> getAllTickets() {
-        List<SupportTicket> supportTickets=ticketRepository.findAll();
-        return supportTickets.stream().map(st->modelMapper.map(st,SupportTicketResponseDto.class)).toList();
+        List<SupportTicket> tickets=ticketRepository.findAll();
+        return tickets.stream().map(st->{
+            SupportTicketResponseDto dto=modelMapper.map(st,SupportTicketResponseDto.class);
+
+            if(st.getAssignedAdmin()!=null){
+                dto.setAssignedAdminId(st.getAssignedAdmin().getUserId());
+            }
+            return dto;
+        }).toList();
     }
 
     @Override
@@ -72,12 +88,26 @@ public class SupportTicketServiceImpl implements SupportTicketService {
     }
 
     @Override
-    public SupportTicketResponseDto updateTicket(Long ticketId, SupportTicketResponseDto supportTicketResponseDto) {
-        return null;
+    public SupportTicketResponseDto updateTicket(Long ticketId, SupportTicketRequestDto dto) {
+        SupportTicket ticket=ticketRepository.findById(ticketId)
+                .orElseThrow(()->new RuntimeException("Ticket not found"));
+        ticket.setUpdatedAt(LocalDateTime.now());
+        if(ticket.getStatus()!=null)
+            ticket.setStatus(dto.getStatus());
+        if(dto.getAssignedAdminId()!=null){
+            User assignedAdmin=userRepository.findById(dto.getAssignedAdminId())
+                            .orElseThrow(()->new RuntimeException("User not found"));
+            ticket.setAssignedAdmin(assignedAdmin);
+        }
+
+        return modelMapper.map(ticketRepository.saveAndFlush(ticket), SupportTicketResponseDto.class);
     }
 
     @Override
     public void deleteTicketById(Long ticketId) {
+        SupportTicket ticket=ticketRepository.findById(ticketId)
+                .orElseThrow(()->new RuntimeException("Ticket not found"));
 
+        ticketRepository.delete(ticket);
     }
 }

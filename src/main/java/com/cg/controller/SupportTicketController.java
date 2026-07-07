@@ -38,4 +38,14 @@ public class SupportTicketController {
         return new ResponseEntity<>(supportTicketService.createTicket(supportTicketRequestDto), HttpStatus.CREATED);
     }
 
+    @PatchMapping("{ticketId}")
+    public ResponseEntity<SupportTicketResponseDto> updateTicket(@PathVariable Long ticketId, @RequestBody SupportTicketRequestDto supportTicketRequestDto) {
+        return new ResponseEntity<>(supportTicketService.updateTicket(ticketId, supportTicketRequestDto), HttpStatus.OK);
+    }
+
+    @DeleteMapping("{ticketId}")
+    public ResponseEntity<SupportTicketResponseDto> deleteTicket(@PathVariable Long ticketId) {
+        supportTicketService.deleteTicketById(ticketId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

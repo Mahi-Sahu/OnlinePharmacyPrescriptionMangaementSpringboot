@@ -10,6 +10,6 @@ public interface SupportTicketService {
     SupportTicketResponseDto getTicketById(Long ticketId);
     List<SupportTicketResponseDto> getAllTickets();
     SupportTicketResponseDto createTicket(SupportTicketRequestDto supportTicketRequestDto);
-    SupportTicketResponseDto updateTicket(Long ticketId,SupportTicketResponseDto supportTicketResponseDto);
+    SupportTicketResponseDto updateTicket(Long ticketId,SupportTicketRequestDto dto);
     void deleteTicketById(Long ticketId);
 }

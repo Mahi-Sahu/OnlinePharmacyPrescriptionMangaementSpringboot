@@ -40,7 +40,7 @@ public class SupportTicket {
     private TicketStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "assignedAdmin")
+    @JoinColumn(name = "assigned_admin_id")
     private  User assignedAdmin;
 
     @Column(name = "created_at")
