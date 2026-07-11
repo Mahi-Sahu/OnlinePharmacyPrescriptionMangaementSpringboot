@@ -1,10 +1,7 @@
 package com.cg.dto.response;
 
-import com.cg.entity.*;
 import com.cg.enums.Gender;
 import com.cg.enums.Role;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +9,6 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter

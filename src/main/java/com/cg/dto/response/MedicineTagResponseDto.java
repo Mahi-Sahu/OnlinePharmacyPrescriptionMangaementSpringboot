@@ -1,6 +1,5 @@
 package com.cg.dto.response;
 
-import com.cg.entity.Brand;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

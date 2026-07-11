@@ -1,6 +1,5 @@
 package com.cg.dto.response;
 
-import com.cg.entity.*;
 import com.cg.enums.DeliverType;
 import com.cg.enums.OrderStatus;
 import com.cg.enums.PaymentMethod;

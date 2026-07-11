@@ -1,8 +1,6 @@
 package com.cg.dto.response;
 
-import com.cg.entity.User;
 import com.cg.enums.PrescriptionStatus;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

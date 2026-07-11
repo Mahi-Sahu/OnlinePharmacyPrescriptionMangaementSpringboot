@@ -1,7 +1,6 @@
 package com.cg.dto.request;
 
 import com.cg.entity.OrderItem;
-import com.cg.entity.Prescription;
 import com.cg.enums.DeliverType;
 import com.cg.enums.OrderStatus;
 import com.cg.enums.PaymentMethod;

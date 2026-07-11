@@ -2,7 +2,6 @@ package com.cg.controller;
 
 import com.cg.dto.request.InventoryRequestDto;
 import com.cg.dto.response.InventoryResponseDto;
-import com.cg.entity.Inventory;
 import com.cg.enums.StockStatus;
 import com.cg.service.InventoryService;
 import org.modelmapper.ModelMapper;

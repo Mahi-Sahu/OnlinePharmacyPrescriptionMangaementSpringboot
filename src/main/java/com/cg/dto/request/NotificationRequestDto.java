@@ -3,8 +3,6 @@ package com.cg.dto.request;
 import com.cg.enums.NotificationType;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 public class NotificationRequestDto {
     private Long userId;

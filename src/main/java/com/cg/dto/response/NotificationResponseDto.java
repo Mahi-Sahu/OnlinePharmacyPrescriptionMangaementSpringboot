@@ -1,14 +1,6 @@
 package com.cg.dto.response;
 
-import com.cg.entity.Order;
-import com.cg.entity.Prescription;
-import com.cg.entity.User;
 import com.cg.enums.NotificationType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

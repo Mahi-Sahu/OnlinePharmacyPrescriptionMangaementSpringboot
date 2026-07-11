@@ -1,6 +1,5 @@
 package com.cg.dto.response;
 
-import com.cg.entity.User;
 import com.cg.enums.StockStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
